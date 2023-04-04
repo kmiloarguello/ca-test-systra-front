@@ -1,24 +1,26 @@
-import logo from './logo.svg';
+import { useReducer } from 'react';
+import initialState from './store';
+import reducer from './reducer';
+import ColorAreaCtx from './context';
 import './App.css';
+import TableContainer from './Components/TableContainer';
+import Input from './Components/Input';
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorAreaCtx.Provider value={{ state, dispatch }}>
+      <div className="ca-app container mx-auto">
+      <div className="py-20">
+        <h1 className="font-sans text-3xl font-normal text-center">CA Color Area</h1>
+        <hr className="my-5" />
+        <div>
+          <Input />
+          <TableContainer />
+        </div>
+      </div>
+    </div>    
+    </ColorAreaCtx.Provider>
   );
 }
 
